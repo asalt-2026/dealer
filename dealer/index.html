@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wholesale Order App</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #product-list { margin: 20px 0; }
+        .product { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; }
+        #cart { border-top: 2px solid #000; margin-top: 20px; padding-top: 10px; }
+        #cart-items { list-style: none; padding: 0; }
+    </style>
+</head>
+<body>
+    <h1>Wholesale Order App</h1>
+    <input type="text" id="search-box" placeholder="Search products..." onkeyup="filterProducts()">
+
+    <div id="product-list">
+        <!-- Sample Product Structure -->
+        <div class="product" data-name="Product 1">
+            <h2>Product 1</h2>
+            <p>Description for Product 1.</p>
+            <p>Price: $10.00</p>
+            <button onclick="addToCart('Product 1', 10)">Add to Cart</button>
+        </div>
+        <div class="product" data-name="Product 2">
+            <h2>Product 2</h2>
+            <p>Description for Product 2.</p>
+            <p>Price: $15.00</p>
+            <button onclick="addToCart('Product 2', 15)">Add to Cart</button>
+        </div>
+        <!-- Repeat for all 100+ products -->
+    </div>
+
+    <h2>Cart</h2>
+    <div id="cart">
+        <ul id="cart-items"></ul>
+        <p>Total: <span id="total-price">$0.00</span></p>
+    </div>
+
+    <h2>Dealer Info Form</h2>
+    <form id="dealer-info">
+        <label for="dealer-name">Name:</label>
+        <input type="text" id="dealer-name" required>
+        <label for="dealer-email">Email:</label>
+        <input type="email" id="dealer-email" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        const cart = [];
+        let totalPrice = 0;
+
+        function addToCart(productName, price) {
+            cart.push(productName);
+            totalPrice += price;
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = '';
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                cartItems.appendChild(li);
+            });
+            document.getElementById('total-price').textContent = `$${totalPrice.toFixed(2)}`;
+        }
+
+        function filterProducts() {
+            const searchValue = document.getElementById('search-box').value.toLowerCase();
+            const products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                const productName = product.getAttribute('data-name').toLowerCase();
+                product.style.display = productName.includes(searchValue) ? 'block' : 'none';
+            });
+        }
+
+        document.getElementById('dealer-info').onsubmit = function(event) {
+            event.preventDefault();
+            alert('Dealer info submitted!');
+        };
+    </script>
+</body>
+</html>
