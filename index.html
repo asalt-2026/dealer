@@ -3,69 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wholesale Order Entry</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        #products { margin-bottom: 20px; }
-        .product { border: 1px solid #ccc; padding: 10px; margin: 5px; }
-        #cart { margin-top: 20px; border: 1px solid #ccc; padding: 10px; }
-    </style>
+    <title>Wholesale App</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<h1>Wholesale Order Entry Application</h1>
-
-<div id="products">
-    <h2>Available Products</h2>
-    <div class="product">
-        <h3>Asalt Fishing Product 1</h3>
-        <p>Price: $10.00</p>
-        <button onclick="addToCart('Asalt Fishing Product 1', 10.00)">Add to Cart</button>
-    </div>
-    <div class="product">
-        <h3>Asalt Fishing Product 2</h3>
-        <p>Price: $15.00</p>
-        <button onclick="addToCart('Asalt Fishing Product 2', 15.00)">Add to Cart</button>
-    </div>
-    <!-- More products should be added here -->
-</div>
-
-<div id="cart">
-    <h2>Shopping Cart</h2>
-    <ul id="cartItems"></ul>
-    <strong>Total: <span id="totalAmount">$0.00</span></strong>
-    <button onclick="checkout()">Checkout</button>
-</div>
-
-<script>
-    let cart = [];
-    let total = 0;
-
-    function addToCart(product, price) {
-        cart.push({ product, price });
-        total += price;
-        updateCart();
-    }
-
-    function updateCart() {
-        const cartItems = document.getElementById('cartItems');
-        cartItems.innerHTML = '';
-        cart.forEach(item => {
-            const li = document.createElement('li');
-            li.textContent = `${item.product} - $${item.price.toFixed(2)}`;
-            cartItems.appendChild(li);
-        });
-        document.getElementById('totalAmount').textContent = `$${total.toFixed(2)`;
-    }
-
-    function checkout() {
-        const email = prompt('Enter your email address:');
-        if (email) {
-            alert(`Checkout complete! A confirmation email will be sent to ${email}`);
-            // Here you would normally send the data to a server to handle email sending.
-        }
-    }
-</script>
-
+    <header>
+        <h1>Asalt Fishing Wholesale App</h1>
+    </header>
+    <main>
+        <section id="product-list"></section>
+        <div id="cart">
+            <h2>Your Cart</h2>
+            <ul id="cart-items"></ul>
+            <button id="checkout">Checkout</button>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2026 Asalt Fishing</p>
+    </footer>
+    <script src="app.js"></script>
 </body>
 </html>
